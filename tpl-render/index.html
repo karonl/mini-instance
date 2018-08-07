@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>mini template render</title>
+    <meta charset="utf-8">
+    <script>
+      const TplRender = function(tp, data) {
+        var re = /{{([^%>]+)?}}/g;
+        var ntp = tp; // 原模板
+        var match;
+        while(match = re.exec(ntp)) {
+          tp = tp.replace(match[0], data[match[1]]);
+        }
+        return tp;
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="main"></div>
+    <script>
+      let data = {
+          test1: "pos机",
+          test2: "图片音像",
+          test3: 100
+      };
+      let template = '商品名称：{{test1}}<br>'
+                  + '商品分类：{{test2}}<br>'
+                  + '商品价格：{{test3}} ';
+
+      document.getElementById("main").innerHTML = TplRender(template, data);
+    </script>
+  </body>
+</html>
