@@ -15,23 +15,34 @@
     <input class="test" x-model="msg2" />
   </div>
   <div>
-    <input class="test" placeholder="test3" x-model="msg3" />
-    <input class="test" x-model="msg3" />
+    <input class="test" placeholder="a" x-model="msg3" />
+    <select class="test" x-model="msg3" />
+    <option value="a">a</option>
+    <option value="b">b</option>
+    <option value="c">c</option>
+    <option value="d">d</option>
+    </select>
   </div>
   <script>
-    function XModel(classname, initData) {
-      let el = document.getElementsByClassName(classname);
+    function XModel(select, initData) {
+      let main = document.querySelector(select) || document;
+
       let bindings = {};
       let data = {};
-      for (let i = 0; i < el.length; i++) {
-        el[i].addEventListener("keyup", handleChange);
+      let el = main.querySelectorAll('[x-model]');
+      for (let i = 0; i < el.length; i++) { // 遍历所有
+        if (el[i].nodeName == 'INPUT') el[i].addEventListener("keyup", handleChange);
+        if (el[i].nodeName == 'SELECT') el[i].addEventListener("change", handleChange);
+        // ...
         el[i].outerHTML.replace(/x-model=\"(.*)\"/g, function (match, unit) {
           bindings[unit] = {};
         });
       }
+
+
       // 绑定元素
       for (let unit in bindings) {
-        bindings[unit].els = document.querySelectorAll('[x-model="' + unit + '"]');
+        bindings[unit].els = main.querySelectorAll('[x-model="' + unit + '"]');
         Object.defineProperty(data, unit, {
           set: function (newVal) {
             bindings[unit].value = newVal;
@@ -57,7 +68,7 @@
       }
     }
 
-    const app = new XModel('test', {
+    const app = new XModel('body', {
       msg1: 'test1',
       msg2: 'test2'
     });
