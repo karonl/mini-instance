@@ -22,6 +22,7 @@
     <option value="c">c</option>
     <option value="d">d</option>
     </select>
+    <div x-model="msg2" ></div>
   </div>
   <script>
     function XModel(select, initData) {
@@ -37,6 +38,9 @@
         el[i].outerHTML.replace(/x-model=\"(.*)\"/g, function (match, unit) {
           bindings[unit] = {};
         });
+        el[i].innerHTML.replace(/\{\{(.*)\}\}/g,  function (match, unit) {
+          bindings[unit] = {};
+        })
       }
 
 
@@ -48,6 +52,7 @@
             bindings[unit].value = newVal;
             bindings[unit].els.forEach(function (el) {
               el.value = newVal;
+              if (el.nodeName == 'DIV') el.textContent = newVal;
             });
           },
           get: function () {
