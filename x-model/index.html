@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>mini x-model</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <div>
+    <input class="test" x-model="msg1" />
+  </div>
+  <div>
+    <input class="test" x-model="msg2" />
+    <input class="test" x-model="msg2" />
+  </div>
+  <div>
+    <input class="test" placeholder="test3" x-model="msg3" />
+    <input class="test" x-model="msg3" />
+  </div>
+  <script>
+    function XModel(classname, initData) {
+      let el = document.getElementsByClassName(classname);
+      let bindings = {};
+      let data = {};
+      for (let i = 0; i < el.length; i++) {
+        el[i].addEventListener("keyup", handleChange);
+        el[i].outerHTML.replace(/x-model=\"(.*)\"/g, function (match, unit) {
+          bindings[unit] = {};
+        });
+      }
+      // 绑定元素
+      for (let unit in bindings) {
+        bindings[unit].els = document.querySelectorAll('[x-model="' + unit + '"]');
+        Object.defineProperty(data, unit, {
+          set: function (newVal) {
+            bindings[unit].value = newVal;
+            bindings[unit].els.forEach(function (el) {
+              el.value = newVal;
+            });
+          },
+          get: function () {
+            return bindings[unit].value;
+          }
+        });
+      }
+      // 反向触发
+      function handleChange(e) {
+        let key = e.target.outerHTML.match(/x-model=\"(.*)\"/)[1];
+        data[key] = e.target.value;
+      }
+      // 最后一步赋值
+      if (initData) {
+        for (let unit in initData) {
+          data[unit] = initData[unit];
+        }
+      }
+    }
+
+    const app = new XModel('test', {
+      msg1: 'test1',
+      msg2: 'test2'
+    });
+
+  </script>
+</body>
+
+</html>
