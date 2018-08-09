@@ -5,19 +5,16 @@
     <meta charset="utf-8">
     <script>
       const TplRender = function(tp, data) {
-        data.html = "";
-        data.echo = function(block) {
+        data.html = "", data.echo = function(block) {
           this.html += block;
         }
-        tp = "&>" + tp + "<&";
         const rep = /&>([^&]+)?<&/g;
-        let match, ntp = tp; // 原模板
+        let match, ntp = tp = (tp = "&>" + tp + "<&").replace(/[\r\t\n]/g, ""); // 原模板
         while(match = rep.exec(tp)) {
           if(match[1]) ntp = ntp.replace(match[0], "echo('" + match[1] + "');");
           else ntp = ntp.replace(match[0], '');
         }
-        ntp = ntp.replace(/[\r\n]/g, "");
-        data.fn = new Function("", ntp.replace(/echo/g, 'this.echo'));
+        data.fn = new Function(ntp.replace(/echo/g, 'this.echo'));
         data.fn();
         return data.html;
       }
