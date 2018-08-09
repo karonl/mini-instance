@@ -27,20 +27,20 @@
       let data = {
         list: [
           {
-            test1: "pos机1",
+            test1: "pos机01",
             test2: "图片音像",
-            test3: 100,
+            test3: 199,
           },
           {
-            test1: "pos机2",
+            test1: "pos机02",
             test2: "游戏娱乐",
-            test3: 200,
+            test3: 299,
           }
         ]
       };
       let template = 
         `<& for(let i=0;i<this.list.length;i++){ &>
-          <div>
+          <div style="margin-bottom: 10px;">
             <p style="margin: 0px">商品名称：<& echo(this.list[i].test1); &></p>
             <p style="margin: 0px">商品分类：<& echo(this.list[i].test2); &></p>
             <p style="margin: 0px">商品价格：<& echo(this.list[i].test3); &></p>
