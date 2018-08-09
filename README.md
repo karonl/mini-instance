@@ -9,3 +9,7 @@ Small function, Great effect
 
 ### tpl-render
 模板引擎关键功能的精简版，即最小 Template Engine 参考例子。
+
+### httpssl-blend
+通过同个端口接受 http 与 https 请求的例子(非转发)，同时使用动态ssl证书加载。
+可用于建设网络边界网关、代理转发、请求拦截分析等。
