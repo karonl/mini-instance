@@ -13,8 +13,8 @@ Small function, Great effect
 (browser)
 
 ### httpssl-blend
-通过同个端口接受 http 与 https 请求的例子(非转发)，同时使用动态ssl证书加载。     
-可用于建设网络边界网关、代理转发、请求拦截分析等。     
+支持同个端口同时接受 http 与 https 请求的例子(非转发模式)，并且支持动态 ssl 证书加载，功能改造一下可用于中间人攻击。     
+正常情况下用于建设网络边界网关、代理转发、https 解密分析等。     
 (node)
 
 ### jsonp-fetch
