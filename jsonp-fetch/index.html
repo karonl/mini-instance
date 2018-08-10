@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>mini jsonp fetch</title>
+    <meta charset="utf-8">
+    <script>
+
+      function Jpfetch(opt) {
+        this.opt = opt;
+        this.script = document.createElement("script");
+        this.script.setAttribute('type', 'text/javascript');
+        this.script.async = true; // 边解析边处理
+        const that = this;
+        this.successload = function (event) {
+          that.remove();
+          console.log("success load");
+        };
+        this.errorload = function (event) { // 接受浏览器失败和手工失败
+          that.remove();
+          console.log("error load");
+        };
+        this.alerterror = function() { // 手工失败
+          const evt = document.createEvent("HTMLEvents");
+          evt.initEvent("error", false, false);
+          this.script.dispatchEvent(evt);
+        };
+        this.remove = function() {
+          this.script.removeEventListener('load', this.successload);
+          this.script.removeEventListener('error', this.errorload);
+          document.head.removeChild(this.script);
+        }
+
+        this.script.addEventListener('load', this.successload);
+        this.script.addEventListener('error', this.errorload);
+        if(!this.opt.callback || !this.opt.url) {
+          this.alerterror();
+        }
+        window['jsonpfetch250'] = opt.callback;
+      }
+      Jpfetch.prototype.run = function() {
+        this.script.src = this.opt.url();
+        document.head.appendChild(this.script);
+      }
+    </script>
+
+    <script>
+      const jp = new Jpfetch({
+        url: () => "http://localhost:12182/?cb=jsonpfetch250",
+        callback: function (arguments) { // 相当该函数由服务器远程调用
+          alert(JSON.stringify(arguments));
+        }
+      });
+      jp.run();
+    </script>
+  </head>
+
+  <body>
+    <div id="main"></div>
+  </body>
+</html>
