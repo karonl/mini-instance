@@ -15,5 +15,5 @@ Small function, Great effect
 可用于建设网络边界网关、代理转发、请求拦截分析等。
 
 ### jsonp-fetch
-对 jsonp-fetch 的基本原理做个小 demo，其实本质是 script 标签加载远程代码。     
-加载js文件的小功能，被利用来做跨域技术，虽然用这个方式跨域已经不再流行。
+探究 jQuery 关于 jsonp 的基本原理并做个小 demo，其实本质是 script 标签加载远程代码。     
+加载js文件的功能，被利用来做跨域技术，确实很取巧，虽然用这个方式跨域已不再流行。
