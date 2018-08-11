@@ -5,7 +5,7 @@ Small function, Great effect
 目的是对热门框架技术进行探究，理解其核心功能原理，并尝试做一个小demo。
 
 ### x-model
-双向数据绑定架构，即最小 MVVM 模型参考例子。     
+web 前端浏览器的双向数据绑定架构，即最小 MVVM 模型参考例子。     
 (browser)
 
 ### tpl-render
@@ -18,9 +18,10 @@ Small function, Great effect
 (node)
 
 ### jsonp-fetch
-探究 jQuery 关于 jsonp 的基本原理并做个小 demo，其实本质是 script 标签加载远程代码。     
+探究 jQuery 关于 jsonp 的基本原理并做个小 demo，其实本质是 script 标签加载远程代码。我们经常用这个方法加载 jQuery。     
 加载js文件的功能，被利用来做跨域技术，确实取巧，虽然用这个方式跨域已不再流行。     
 (browser, node)
 
 ### hot-server
-该 demo 是对 hotfix 的一次实践，通过拦截 nodejs 模块加载机制，实现部分代码替换而无需重启整个进程。热替换相对于 supervisor、nodemon 有其优势的地方，可直接替换业务逻辑模块而无需进行复杂的初始化过程(如数据库连接)。
+服务端 hotfix 的一次实践，通过拦截 nodejs 模块加载机制，实现部分代码替换而无需重启整个进程。热替换相对于 supervisor、nodemon 有其优势的地方，比如直接替换业务逻辑模块而无需进行复杂的初始化过程(数据库连接)。
+(node)
