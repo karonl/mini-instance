@@ -1,3 +1,4 @@
+console.log("run");
 module.exports = {
   name: 'karonl_2',
   method: function () {
