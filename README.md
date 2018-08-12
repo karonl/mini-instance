@@ -27,6 +27,6 @@ web 前端浏览器的双向数据绑定架构，即最小 MVVM 模型参考例�
 (node)
 
 ### x-compose
-函数迭代器 middleware framework ，通过 middleware stack 存储每个函数，并使用递归的方式迭代运行，同时函数内可使用 next(); 进行下一步操作。     
+函数迭代器 middleware framework ，通过 middleware stack 存储每个函数，并使用递归的方式迭代运行，同时函数内可使用 next(); 进行下一步操作。     
 更主要的是该模式支持"普通函数"与"异步函数"组成堆栈，即该项目是 koa、express 核心功能的小 demo。     
 (node)
