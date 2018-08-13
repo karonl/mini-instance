@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<!--目前存在滚动条兼容性问题-->
+
+<head>
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+</head>
+<body id="body">
+  <div id="list"></div>
+</body>
+<script>
+  let list = document.getElementById('list');
+  list.style.height = 120 * 10000 + "px";
+  let li = document.createElement("li");
+  list.append(li);
+  let nowscroll = 0;
+  // scroll监听
+  let liser = function (e) {
+    nowscroll = getScrollTop()
+    setTimeout('draw(nowscroll)', 0);
+  };
+
+  function getScrollTop() {
+    let scrollTop = document.documentElement.scrollTop;
+    return scrollTop;
+  }
+
+  function setScrollTop(scroll_top) {
+    document.documentElement.scrollTop = scroll_top;
+  }
+
+  // 绘制
+  function draw(mtop) {
+    let begin = Math.floor(mtop / 120);
+    li.style.marginTop = begin * 119 + "px";
+    while (li.hasChildNodes()) {
+      li.removeChild(li.firstChild);
+    }
+
+    for (let r = begin; r < begin + 10; r++) {
+      let innerdiv = document.createElement("div");
+      innerdiv.style.padding = '20px';
+      innerdiv.style.height = "60px";
+      innerdiv.style.background = '#f2f2f2';
+      innerdiv.textContent = "item " + r;
+      let div = document.createElement("div");
+      div.style.height = "120px";
+      div.append(innerdiv);
+      li.append(div);
+    }
+    setScrollTop(mtop);
+  }
+  window.addEventListener('scroll', liser);
+  draw(1);
+</script>
+
+</html>
